@@ -3,58 +3,30 @@
 import { useState } from 'react';
 import axios from 'axios';
 import { Container, TextField, Button, Typography, Grid, Box, Card, CardContent } from '@mui/material';
-import { makeStyles } from '@mui/styles';
+import { styled } from '@mui/material/styles';
 
-const useStyles = makeStyles((theme) => ({
-  container: {
-    paddingTop: '50px',
-    minHeight: '100vh',
-    backgroundImage: 'url("/public/1.jpg")',
-    backgroundSize: 'cover',
-    backgroundPosition: 'center',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backdropFilter: 'blur(5px)',
-  },
-  card: {
-    padding: theme.spacing(4),
-    borderRadius: '8px',
-    boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
-    backgroundColor: 'rgba(255, 255, 255, 0.9)',
-    width: '100%',
-    maxWidth: '600px',
-  },
-  title: {
-    fontWeight: 'bold',
-    color: theme.palette.primary.main,
-    textAlign: 'center',
-    marginBottom: theme.spacing(3),
-  },
-  input: {
-    marginBottom: theme.spacing(2),
-  },
-  button: {
-    marginTop: theme.spacing(2),
-    '&:hover': {
-      backgroundColor: theme.palette.primary.dark,
-    },
-  },
-  uploadButton: {
-    marginTop: theme.spacing(2),
-    width: '100%',
-    padding: '8px',
-    fontSize: '16px',
-    textAlign: 'center',
-    backgroundColor: theme.palette.secondary.main,
-    '&:hover': {
-      backgroundColor: theme.palette.secondary.dark,
-    },
-  },
+const StyledContainer = styled('div')(({ theme }) => ({
+  paddingTop: '50px',
+  minHeight: '100vh',
+  backgroundImage: 'url("/1.jpg")',
+  backgroundSize: 'cover',
+  backgroundPosition: 'center',
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  backdropFilter: 'blur(5px)',
+}));
+
+const StyledCard = styled(Card)(({ theme }) => ({
+  padding: theme.spacing(4),
+  borderRadius: '8px',
+  boxShadow: '0 4px 20px rgba(0, 0, 0, 0.1)',
+  backgroundColor: 'rgba(255, 255, 255, 0.9)',
+  width: '100%',
+  maxWidth: '600px',
 }));
 
 export default function AddSchool() {
-  const classes = useStyles();
   const [schoolData, setSchoolData] = useState({
     name: '',
     address: '',
@@ -62,7 +34,7 @@ export default function AddSchool() {
     state: '',
     contact: '',
     image: null,
-    email_id: ''
+    email_id: '',
   });
 
   const handleChange = (e) => {
@@ -74,10 +46,15 @@ export default function AddSchool() {
   };
 
   const handleFileChange = (e) => {
-    setSchoolData({
-      ...schoolData,
-      image: e.target.files[0],
-    });
+    const file = e.target.files[0];
+    if (file && file.size < 5000000) { // Limit file size to 5MB
+      setSchoolData({
+        ...schoolData,
+        image: file,
+      });
+    } else {
+      alert('Please upload a file smaller than 5MB');
+    }
   };
 
   const handleSubmit = async (e) => {
@@ -108,9 +85,9 @@ export default function AddSchool() {
   };
 
   return (
-    <div className={classes.container}>
-      <Card className={classes.card}>
-        <Typography variant="h4" className={classes.title}>
+    <StyledContainer>
+      <StyledCard>
+        <Typography variant="h4" align="center" gutterBottom>
           Add a New School
         </Typography>
         <form onSubmit={handleSubmit}>
@@ -121,7 +98,7 @@ export default function AddSchool() {
             name="name"
             value={schoolData.name}
             onChange={handleChange}
-            className={classes.input}
+            margin="normal"
             required
           />
           <TextField
@@ -131,7 +108,7 @@ export default function AddSchool() {
             name="address"
             value={schoolData.address}
             onChange={handleChange}
-            className={classes.input}
+            margin="normal"
             required
           />
           <Grid container spacing={2}>
@@ -143,8 +120,8 @@ export default function AddSchool() {
                 name="city"
                 value={schoolData.city}
                 onChange={handleChange}
+                margin="normal"
                 required
-                className={classes.input}
               />
             </Grid>
             <Grid item xs={6}>
@@ -155,8 +132,8 @@ export default function AddSchool() {
                 name="state"
                 value={schoolData.state}
                 onChange={handleChange}
+                margin="normal"
                 required
-                className={classes.input}
               />
             </Grid>
           </Grid>
@@ -167,7 +144,7 @@ export default function AddSchool() {
             name="contact"
             value={schoolData.contact}
             onChange={handleChange}
-            className={classes.input}
+            margin="normal"
             required
           />
           <TextField
@@ -177,25 +154,30 @@ export default function AddSchool() {
             name="email_id"
             value={schoolData.email_id}
             onChange={handleChange}
-            className={classes.input}
+            margin="normal"
             required
           />
           <Box mt={2}>
-            <input
-              type="file"
-              name="image"
-              onChange={handleFileChange}
-              required
-              className={classes.uploadButton}
-            />
+            <Button
+              variant="contained"
+              component="label"
+              fullWidth
+            >
+              Upload Image
+              <input
+                type="file"
+                hidden
+                onChange={handleFileChange}
+              />
+            </Button>
           </Box>
           <Box mt={3}>
-            <Button variant="contained" color="primary" type="submit" fullWidth className={classes.button}>
+            <Button variant="contained" color="primary" type="submit" fullWidth>
               Add School
             </Button>
           </Box>
         </form>
-      </Card>
-    </div>
+      </StyledCard>
+    </StyledContainer>
   );
 }

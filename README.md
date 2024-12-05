@@ -1,8 +1,6 @@
+### School Management System
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
-
-## Getting Started
-
-echo "# School Management System
 
 ## Project Overview
 This is a School Management System that allows users to add new schools with relevant details such as name, address, city, state, contact information, email, and logo. The application provides an intuitive user interface for adding school information and supports uploading an image (school logo). 

@@ -2,18 +2,15 @@ const express = require('express');
 const cors = require('cors');
 const schoolRoutes = require('./routes/schoolRoutes');
 const path = require('path');
-require('dotenv').config();
+const db = require('./config/db'); // Import the database configuration
 
 const app = express();
 
-// Middlewares
-// app.use(cors());
-app.use(cors({
-  origin: "*", // Or specify the exact allowed origin
-  methods: "GET,POST",
-  allowedHeaders: "Content-Type"
-}));
+// Check database connection
+db.connect();
 
+// Middlewares
+app.use(cors());
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use('/public', express.static(path.join(__dirname, 'public'))); // Serving images
@@ -21,7 +18,7 @@ app.use('/public', express.static(path.join(__dirname, 'public'))); // Serving i
 // API Routes
 app.use('/api', schoolRoutes);
 
-const port = 5000;
+const port = process.env.PORT || 5000;
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

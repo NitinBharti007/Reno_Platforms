@@ -1,13 +1,11 @@
-const mysql = require('mysql2/promise');
+const mysql = require('mysql2');
 
-// Database connection pool
-const db = mysql.createPool({
+const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
 });
-
 
 db.connect((err) => {
   if (err) {
@@ -18,7 +16,6 @@ db.connect((err) => {
 });
 
 module.exports = db;
-
 
 
 // CREATE DATABASE school_management;

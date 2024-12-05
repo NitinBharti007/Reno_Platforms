@@ -2,7 +2,7 @@ const express = require('express');
 const cors = require('cors');
 const schoolRoutes = require('./routes/schoolRoutes');
 const path = require('path');
-
+require('dotenv').config();
 
 const app = express();
 

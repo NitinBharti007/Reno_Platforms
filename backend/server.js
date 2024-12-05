@@ -9,7 +9,7 @@ const app = express();
 // Middlewares
 // app.use(cors());
 app.use(cors({
-  origin: "https://reno-platforms.vercel.app", // Or specify the exact allowed origin
+  origin: "*", // Or specify the exact allowed origin
   methods: "GET,POST",
   allowedHeaders: "Content-Type"
 }));

@@ -3,11 +3,10 @@ const cors = require('cors');
 const schoolRoutes = require('./routes/schoolRoutes');
 const path = require('path');
 const db = require('./config/db'); // Import the database configuration
+require('dotenv').config(); // Add this line at the top
+
 
 const app = express();
-
-// Check database connection
-db.connect();
 
 // Middlewares
 app.use(cors());

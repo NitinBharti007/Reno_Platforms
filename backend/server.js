@@ -3,6 +3,7 @@ const cors = require('cors');
 const schoolRoutes = require('./routes/schoolRoutes');
 const path = require('path');
 
+
 const app = express();
 
 // Middlewares

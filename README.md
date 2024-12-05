@@ -1,36 +1,42 @@
+### School Management System
+
 This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
-## Getting Started
+## Project Overview
+This is a School Management System that allows users to add new schools with relevant details such as name, address, city, state, contact information, email, and logo. The application provides an intuitive user interface for adding school information and supports uploading an image (school logo). 
 
-First, run the development server:
+## Features
+- Add a new school with details: Name, Address, City, State, Contact, and Email.
+- Upload a school logo.
+- Success notification displayed upon successful school addition.
+- Button to navigate to the list of all schools.
+- Responsive design for different screen sizes.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+## Technologies Used
+- **Frontend**: NextJS, Material UI (MUI)
+- **Backend**: Node.js (Express.js)
+- **Database**: MySQL
+- **Others**: Axios for API requests
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## How to Run
+1. Clone the repository.
+2. Install dependencies:
+   - Frontend: `npm install` in the frontend folder.
+   - Backend: `npm install` in the backend folder.
+3. Run the frontend and backend:
+   - Frontend: `npm start` (This will run the React app on port 3000)
+   - Backend: `npm start` (This will run the API server on port 5000)
+4. Visit `http://localhost:3000` to access the app.
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+## Setup
+1. Ensure you have Node.js installed.
+2. For production use, make sure the environment variables are set up for the backend (database connection, etc.).
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Contributing
+Feel free to fork and create pull requests. Please make sure to update tests as necessary.
 
-## Learn More
+## License
+This project is open-source and available under the [MIT License](LICENSE).
 
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Contact
+For any questions, feel free to contact me at [dev.nitin63@gmail.com](mailto:dev.nitin63@gmail.com).

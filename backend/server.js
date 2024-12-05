@@ -6,7 +6,13 @@ const path = require('path');
 const app = express();
 
 // Middlewares
-app.use(cors());
+// app.use(cors());
+app.use(cors({
+  origin: "*", // Or specify the exact allowed origin
+  methods: "GET,POST",
+  allowedHeaders: "Content-Type"
+}));
+
 app.use(express.json()); // for parsing application/json
 app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use('/public', express.static(path.join(__dirname, 'public'))); // Serving images

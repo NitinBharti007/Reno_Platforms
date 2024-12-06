@@ -39,6 +39,7 @@ export default function AddSchool() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+  const fileInputRef = useRef(null);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,6 +79,9 @@ export default function AddSchool() {
         image: null,
         email_id: "",
       });
+      if (fileInputRef.current) {
+        fileInputRef.current.value = "";
+      }
     } catch (error) {
       setError("Error adding school");
       console.error("Error adding school:", error);
@@ -262,6 +266,7 @@ export default function AddSchool() {
               type="file"
               name="image"
               onChange={handleFileChange}
+              ref={fileInputRef}
               required
               style={{
                 display: "block",

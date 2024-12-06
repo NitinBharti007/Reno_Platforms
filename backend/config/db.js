@@ -1,3 +1,4 @@
+require('dotenv').config();
 const mysql = require('mysql2');
 
 const db = mysql.createConnection({
@@ -10,14 +11,12 @@ const db = mysql.createConnection({
 db.connect((err) => {
   if (err) {
     console.error('Error connecting to the database:', err.message);
-    console.error('Check your database credentials and host.');
   } else {
     console.log('Database connected!');
   }
 });
 
 module.exports = db;
-
 
 // CREATE DATABASE school_management;
 

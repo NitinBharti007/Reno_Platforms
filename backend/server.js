@@ -8,8 +8,14 @@ const db = require('./config/pool');
 
 const app = express();
 
+const corsOptions = {
+  origin: 'https://reno-platforms.onrender.com/', // Replace with your frontend URL
+  methods: 'GET,POST,PUT,DELETE',
+  credentials: true
+};
+
 // Middlewares
-app.use(cors());
+app.use(cors(corsOptions));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(path.join(__dirname, 'public')));

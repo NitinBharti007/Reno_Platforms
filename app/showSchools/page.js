@@ -10,9 +10,7 @@ export default function ShowSchools() {
   useEffect(() => {
     const fetchSchools = async () => {
       try {
-        // Use the environment variable for the backend URL
-        const backendUrl = process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000';
-        const response = await axios.get(`${backendUrl}/getSchools`);
+        const response = await axios.get('http://localhost:5000/api/getSchools');
         setSchools(response.data);
       } catch (error) {
         console.error('Error fetching schools:', error);
@@ -56,7 +54,7 @@ export default function ShowSchools() {
                   <CardMedia
                     component="img"
                     alt={school.name}
-                    image={`${process.env.REACT_APP_BACKEND_URL || 'http://localhost:5000'}/public/schoolImages/${school.image}`}
+                    image={`http://localhost:5000/public/schoolImages/${school.image}`}
                     sx={{
                       objectFit: 'cover',
                       height: '200px',

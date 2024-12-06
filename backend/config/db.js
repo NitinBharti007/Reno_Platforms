@@ -1,22 +1,22 @@
 require('dotenv').config();
 const mysql = require('mysql2');
 
-// Create a connection pool
-const pool = mysql.createPool({
+const db = mysql.createConnection({
   host: process.env.DB_HOST,
   user: process.env.DB_USER,
   password: process.env.DB_PASS,
   database: process.env.DB_NAME,
-  waitForConnections: true, // Allow the pool to wait for connections to be available
-  connectionLimit: 10,      // Max number of connections the pool can have
-  queueLimit: 0             // No limit on the number of queued connections
 });
 
-// Create a promise-based wrapper around the pool
-const promisePool = pool.promise(); // This returns a pool that returns promises
+db.connect((err) => {
+  if (err) {
+    console.error('Error connecting to the database:', err.message);
+  } else {
+    console.log('Database connected!');
+  }
+});
 
-module.exports = promisePool;
-
+module.exports = db;
 
 // CREATE DATABASE school_management;
 

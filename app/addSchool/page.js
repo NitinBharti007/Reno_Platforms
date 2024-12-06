@@ -75,7 +75,9 @@ export default function AddSchool() {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:5000/api/addSchool", formData, {
+
+      const backendUrl = process.env.REACT_APP_BACKEND_URL || "http://localhost:5000";
+      await axios.post(`${backendUrl}/addSchool`, formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setOpenSnackbar(true);

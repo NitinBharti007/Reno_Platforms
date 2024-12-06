@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const db = require('../config/pool'); // Assuming pool is the configured database connection
+const db = require('../config/pool'); // Now importing the pool
 const multer = require('multer');
 const path = require('path');
 
@@ -17,7 +17,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage });
 
 // Add new school
-router.post('/addSchool', upload.single('image'), (req, res) => {
+router.post('/addSchool', upload.single('image'), async (req, res) => {
   const { name, address, city, state, contact, email_id } = req.body;
   const image = req.file ? req.file.filename : null; // Ensure image is present
 
@@ -27,25 +27,25 @@ router.post('/addSchool', upload.single('image'), (req, res) => {
   }
 
   const query = 'INSERT INTO schools (name, address, city, state, contact, image, email_id) VALUES (?, ?, ?, ?, ?, ?, ?)';
-  db.query(query, [name, address, city, state, contact, image, email_id], (err, result) => {
-    if (err) {
-      console.error('Error adding school:', err);
-      return res.status(500).json({ message: 'Error adding school' });
-    }
+  try {
+    const [result] = await db.execute(query, [name, address, city, state, contact, image, email_id]);
     res.status(201).json({ message: 'School added successfully', schoolId: result.insertId });
-  });
+  } catch (err) {
+    console.error('Error adding school:', err);
+    return res.status(500).json({ message: 'Error adding school' });
+  }
 });
 
 // Get all schools
-router.get('/getSchools', (req, res) => {
+router.get('/getSchools', async (req, res) => {
   const query = 'SELECT * FROM schools';
-  db.query(query, (err, results) => {
-    if (err) {
-      console.error('Error fetching schools:', err);
-      return res.status(500).json({ message: 'Error fetching schools' });
-    }
+  try {
+    const [results] = await db.execute(query);
     res.status(200).json(results);
-  });
+  } catch (err) {
+    console.error('Error fetching schools:', err);
+    return res.status(500).json({ message: 'Error fetching schools' });
+  }
 });
 
 module.exports = router;

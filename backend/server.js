@@ -4,7 +4,7 @@ const express = require('express');
 const cors = require('cors');
 const schoolRoutes = require('./routes/schoolRoutes');
 const path = require('path');
-const db = require('../config/pool');
+const db = require('./config/pool');
 
 const app = express();
 

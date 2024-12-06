@@ -1,10 +1,10 @@
-const db = require('./config/db'); // Import database config after dotenv
+// Import database configuration after dotenv
+require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 const schoolRoutes = require('./routes/schoolRoutes');
 const path = require('path');
-require('dotenv').config(); // Load environment variables
-
+const db = require('./config/db'); // Ensure that this is your PostgreSQL database connection setup
 
 const app = express();
 
@@ -17,7 +17,8 @@ app.use('/public', express.static(path.join(__dirname, 'public')));
 // API Routes
 app.use('/api', schoolRoutes);
 
-const port = process.env.PORT || 5000;
+// Start server
+const port = process.env.PORT || 5000; // Default to 5000 if not specified in environment variables
 app.listen(port, () => {
   console.log(`Server running on http://localhost:${port}`);
 });

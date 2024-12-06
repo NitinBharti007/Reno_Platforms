@@ -9,7 +9,11 @@ const db = require('./config/db');
 const app = express();
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+  origin: 'https://reno-platforms.vercel.app', // Replace with your frontend's URL
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],   // Allowed HTTP methods
+  credentials: true                            // Allow cookies and credentials if needed
+}));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use('/public', express.static(path.join(__dirname, 'public')));

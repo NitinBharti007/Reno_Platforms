@@ -75,7 +75,7 @@ export default function AddSchool() {
     setLoading(true);
 
     try {
-      await axios.post("http://localhost:5000/api/addSchool", formData, {
+      await axios.post("https://reno-platforms-kxm6.vercel.app/api/addSchool", formData, {
         headers: { "Content-Type": "multipart/form-data" },
       });
       setOpenSnackbar(true);

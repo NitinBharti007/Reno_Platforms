@@ -10,7 +10,7 @@ export default function ShowSchools() {
   useEffect(() => {
     const fetchSchools = async () => {
       try {
-        const response = await axios.get('http://localhost:5000/api/getSchools');
+        const response = await axios.get('https://reno-platforms-kxm6.vercel.app/api/getSchools');
         setSchools(response.data);
       } catch (error) {
         console.error('Error fetching schools:', error);
@@ -54,7 +54,7 @@ export default function ShowSchools() {
                   <CardMedia
                     component="img"
                     alt={school.name}
-                    image={`http://localhost:5000/public/schoolImages/${school.image}`}
+                    image={`https://reno-platforms-kxm6.vercel.app/public/schoolImages/${school.image}`}
                     sx={{
                       objectFit: 'cover',
                       height: '200px',

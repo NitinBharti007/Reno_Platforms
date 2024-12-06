@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useRef } from "react";
 import axios from "axios";
 import {
   Container,
@@ -36,6 +36,8 @@ export default function AddSchool() {
   });
 
   const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [errorSnackbar, setErrorSnackbar] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("");
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
@@ -58,6 +60,13 @@ export default function AddSchool() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    if (!schoolData.image) {
+      setErrorMessage("Please upload a valid image.");
+      setErrorSnackbar(true);
+      return;
+    }
+
     const formData = new FormData();
     for (let key in schoolData) {
       formData.append(key, schoolData[key]);
@@ -321,6 +330,21 @@ export default function AddSchool() {
             sx={{ width: "100%" }}
           >
             School added successfully!
+          </Alert>
+        </Snackbar>
+
+        <Snackbar
+          open={errorSnackbar}
+          autoHideDuration={6000}
+          onClose={handleCloseSnackbar}
+          anchorOrigin={{ vertical: "top", horizontal: "right" }}
+        >
+          <Alert
+            onClose={handleCloseSnackbar}
+            severity="error"
+            sx={{ width: "100%" }}
+          >
+            {errorMessage}
           </Alert>
         </Snackbar>
 
